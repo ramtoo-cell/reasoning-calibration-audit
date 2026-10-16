@@ -21,4 +21,4 @@ def analyze(data):
     for threshold in sorted({r['confidence'] for r in rows},reverse=True):
         accepted=[r for r in rows if r['confidence']>=threshold]
         curve.append({'threshold':threshold,'coverage':len(accepted)/n,'risk':1-sum(r['correct'] for r in accepted)/len(accepted)})
-    return {'n':n,'brier':sum((r['confidence']-r['correct'])**2 for r in rows)/n,'ece':ece,'bins':histogram,'risk_coverage':curve}
+    return {'n':n,'brier':math.fsum((r['confidence']-r['correct'])**2 for r in rows)/n,'ece':ece,'bins':histogram,'risk_coverage':curve}
